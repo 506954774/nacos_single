@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiParam;
  * Copyright : 2014-2018 深圳令令科技有限公司-版权所有
  **/
 @RestController
-public class TestController {
+public class RestTemplateController {
 
     @LoadBalanced
     @Bean

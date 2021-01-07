@@ -1,11 +1,9 @@
 package com.example.comsumer.controller;
 
-import com.example.comsumer.feign_clients.FeignController;
+import com.example.commons.vo.ResponseEntity;
+import com.example.comsumer.feign_clients.FeignControllerUser;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,16 +22,18 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @RestController
-public class Controller {
+public class UserController {
 
     @Resource
-    private FeignController feignController;
+    private FeignControllerUser feignController;
 
     @ApiOperation(value = "使用FeignController实现RPC", notes = "使用FeignController实现RPC")
     @GetMapping("/feign_rpc")
-    public String sendByForgetPwd(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
+    public ResponseEntity test(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
                                           @RequestParam(value = "message") String message) {
-        return feignController.sendByForgetPwd(message);
+        return feignController.test(message);
     }
+
+
 
 }

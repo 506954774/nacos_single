@@ -6,13 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="file-upload" />
         <module name="user-provider" />
-        <module name="nacos-parent" />
+        <module name="commons" />
         <module name="comsumer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="commons" target="1.8" />
       <module name="comsumer" target="1.8" />
+      <module name="file-upload" target="1.8" />
       <module name="nacos-parent" target="1.8" />
       <module name="user-provider" target="1.8" />
     </bytecodeTargetLevel>
@@ -20,7 +23,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="comsumer" options="-parameters" />
-      <module name="nacos-parent" options="-parameters" />
+      <module name="file-upload" options="-parameters" />
+      <module name="nacos-parent" options="" />
       <module name="user-provider" options="-parameters" />
     </option>
   </component>

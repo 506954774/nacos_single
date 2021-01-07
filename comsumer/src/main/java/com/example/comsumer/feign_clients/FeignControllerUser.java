@@ -1,9 +1,9 @@
 package com.example.comsumer.feign_clients;
 
+import com.example.commons.vo.ResponseEntity;
 import com.example.comsumer.api.UserProvider;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 创建/修改时间: 2020/12/30  19:50
  * Copyright : 2014-2018 深圳令令科技有限公司-版权所有
  **/
-@FeignClient(value = UserProvider.SERVICE_ID)
-public interface FeignController
+@FeignClient(value = "user")
+public interface FeignControllerUser
         //extends  UserProvider
 {
     /**
@@ -31,5 +31,5 @@ public interface FeignController
      **/
     @GetMapping( "user/test" )
     //@RequestMapping(value  ="user/test",method = RequestMethod.GET)
-    String sendByForgetPwd(@RequestParam(value = "message") String message);
+    ResponseEntity test(@RequestParam(value = "message") String message);
 }
