@@ -24,21 +24,16 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @RestController
-@RequestMapping("/user")
 public class Controller {
 
     @Resource
     private FeignController feignController;
 
-
     @ApiOperation(value = "使用FeignController实现RPC", notes = "使用FeignController实现RPC")
-    @GetMapping("/test")
-    public ResponseEntity sendByForgetPwd(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
+    @GetMapping("/feign_rpc")
+    public String sendByForgetPwd(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
                                           @RequestParam(value = "message") String message) {
         return feignController.sendByForgetPwd(message);
     }
-
-
-
 
 }

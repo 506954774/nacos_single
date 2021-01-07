@@ -34,12 +34,13 @@ public class UserProvider {
     @ApiOperation(value = "测试swagger", notes = "测试swagger")
     //@GetMapping("/test")
     @RequestMapping(value  ="/user/test",method = RequestMethod.GET)
-    public ResponseEntity sendByForgetPwd(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
+    public String sendByForgetPwd(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
                                           @RequestParam(value = "message") String message) {
 
         String response= MessageFormat.format("服务提供者端口：{0}，收到调用者的message：{1}",String.valueOf(port),message);
-        return new ResponseEntity<String>(response,HttpStatus.OK);
+        //return new ResponseEntity<String>(response,HttpStatus.OK);
 
+        return response;
     }
 
 

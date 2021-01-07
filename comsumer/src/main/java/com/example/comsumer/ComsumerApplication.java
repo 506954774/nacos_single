@@ -30,9 +30,6 @@ public class ComsumerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ComsumerApplication.class, args);
     }
-
-
-
     @Bean
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class)).build();

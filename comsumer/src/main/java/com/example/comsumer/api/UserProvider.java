@@ -1,6 +1,7 @@
 package com.example.comsumer.api;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,17 @@ public interface UserProvider {
 
     final String SERVICE_ID="user";
 
+    /**
+     * @method name:
+     * @des:  注意，返回值的类型，必须要有无参的构造函数，否则会报错
+     * @param :
+     * @return type:
+     * @date 创建时间:2021/1/7
+     * @version 1.0.0
+     * @author Chuck
+     **/
+
     @RequestMapping(value  ="/user/test",method = RequestMethod.GET)
-    public ResponseEntity sendByForgetPwd(@RequestParam(value = "message") String message);
+    public String sendByForgetPwd(@RequestParam(value = "message") String message);
 
 }

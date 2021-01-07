@@ -11,16 +11,16 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Created by ilinklink on 2020/3/31.
  */
-@Configuration
-public class RibbonConfig {
+//@Configuration
+public class LoadbalancerConfig {
 
-    @Bean
-    @LoadBalanced
+    //@Bean
+    //@LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
-    @Bean
+    //@Bean
     public IRule iRule(){
          //return new WeightedResponseTimeRule();
         return new RoundRobinRule();
