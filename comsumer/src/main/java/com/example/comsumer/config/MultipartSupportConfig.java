@@ -19,17 +19,17 @@ import feign.form.spring.SpringFormEncoder;
  * 创建/修改时间: 2021/1/7  16:28
  * Copyright : 2014-2018 深圳令令科技有限公司-版权所有
  **/
-@Configuration
-class MultipartSupportConfig {
+//@Configuration
+public class MultipartSupportConfig {
    /* @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
 
     @Bean
     public Encoder feignFormEncoder() {
         return new SpringFormEncoder(new SpringEncoder(messageConverters));
-    }*/
+    }
 
-    @Autowired
+  @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
 
     @Scope("prototype")
@@ -38,4 +38,9 @@ class MultipartSupportConfig {
     public Encoder feignFormecoder() {
         return new SpringFormEncoder(new SpringEncoder(messageConverters));
     }
+
+    @Bean
+    public Encoder feignFormEncoder() {
+        return new SpringFormEncoder();
+    }*/
 }

@@ -7,8 +7,10 @@ import com.example.file.upload.FastDFSClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,8 +72,9 @@ public class FileUploadController {
 
 
     @ApiOperation(value = "单文件上传2", response = String.class, notes = "单文件上传,返回可访问的路径")
-    @PostMapping("/upload2")
-    public ResponseEntity uploadFileAction2(@RequestParam("file") MultipartFile file) {
+    //@PostMapping("/upload2")
+    @RequestMapping(value = "/upload2",method = RequestMethod.POST , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadFileAction2(@RequestParam(value = "file")  MultipartFile file) {
         try {
             String result= uploadFile(file);
             ResponseEntity<String> responseEntity = new ResponseEntity<>(true);
@@ -83,8 +86,9 @@ public class FileUploadController {
     }
 
     @ApiOperation(value = "多文件上传2",  response = ArrayList.class, notes = "文件批量上传,返回list<String>")
-    @PostMapping("/multi_upload2")
-    public ResponseEntity multiImportAction2(@RequestParam("file")  List<MultipartFile> files) {
+    //@PostMapping("/multi_upload2")
+    @RequestMapping(value = "/multi_upload2",method = RequestMethod.POST , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity multiImportAction2(@RequestParam(value = "file")  List<MultipartFile> files) {
         try {
             List<String> result= multiImport(files);
             ResponseEntity<List<String>> responseEntity = new ResponseEntity<>(true);
@@ -141,7 +145,7 @@ public class FileUploadController {
 
             String fileUrl = fastDFSClient.uploadFile(file_buff, fileType);
             log.info( LOGGER_PREFIX + "[文件上传]文件上传成功！文件链接url[" + fileUrl + "].");
-            return dfsHost + "/" + fileUrl;
+            return "http://"+dfsHost + "/" + fileUrl;
         } catch (Exception e) {
             log.error( LOGGER_PREFIX + "[文件上传]文件上传失败！", e);
             throw new AdminException(AdminErrorCode.REQUEST_EXCEPTION, "文件上传失败！");

@@ -2,6 +2,8 @@ package com.example.comsumer.feign_clients;
 
 import com.example.commons.vo.ResponseEntity;
 import com.example.comsumer.api.UserProvider;
+import com.example.comsumer.config.FeignSupportConfig;
+import com.example.comsumer.config.MultipartSupportConfig;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -27,7 +30,8 @@ import io.swagger.annotations.ApiOperation;
  * 创建/修改时间: 2020/12/30  19:50
  * Copyright : 2014-2018 深圳令令科技有限公司-版权所有
  **/
-@FeignClient(value = "file")
+//@FeignClient(value = "file",configuration = FeignSupportConfig.class)
+@FeignClient(value = "file" ,configuration = FeignSupportConfig.class)
 public interface FeignControllerFile
         //extends  UserProvider
 {
@@ -46,9 +50,14 @@ public interface FeignControllerFile
 
 
 
-    @PostMapping("/upload2")
-    public ResponseEntity uploadFileAction2(@RequestParam("file") MultipartFile file) ;
+    @RequestMapping(value = "/upload2",method = RequestMethod.POST
+            , produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadFileAction2(@RequestParam(value = "file") MultipartFile file) ;
 
-    @PostMapping("/multi_upload2")
-    public ResponseEntity multiImportAction2(@RequestParam("file")  List<MultipartFile> files);
+    //@PostMapping("/multi_upload2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @RequestMapping(value = "/multi_upload2",method = RequestMethod.POST ,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity multiImportAction2(@RequestParam(value = "file")  List<MultipartFile> files);
 }

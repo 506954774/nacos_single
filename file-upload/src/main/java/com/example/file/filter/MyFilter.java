@@ -31,11 +31,16 @@ public class MyFilter implements Filter {
         try {
             HttpServletRequest req = (HttpServletRequest) request;
             String header = req.getHeader("Content-Type");
+
+            System.out.println(header);
+
             MutableHttpServletRequest mutableRequest = new MutableHttpServletRequest(req);
             //mutableRequest.putHeader("Content-Type", "multipart/form-data");
-            mutableRequest.putHeader("Content-Type", "multipart/form-data; boundary=-------------------------acebdf13572468");
+            //mutableRequest.putHeader("Content-Type", "multipart/form-data; boundary=-------------------------acebdf13572468");
             header = mutableRequest.getHeader("Content-Type");
-            chain.doFilter(mutableRequest, response);
+           // chain.doFilter(mutableRequest, response);
+
+            chain.doFilter(request, response);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ServletException e) {
