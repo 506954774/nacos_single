@@ -1,10 +1,8 @@
 package com.example.comsumer.controller;
 
 import com.example.commons.vo.ResponseEntity;
-import com.example.comsumer.feign_clients.FeignControllerFile;
-import com.example.comsumer.feign_clients.FeignControllerUser;
+import com.example.comsumer.feign_clients.FeignFileUploadWithNacos;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +14,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import feign.Headers;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -30,11 +26,21 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @RestController
-public class FileController {
+public class NacosFeignFileController {
 
     @Resource
-    private FeignControllerFile feignControllerFile;
+    private FeignFileUploadWithNacos feignControllerFile;
 
+
+    /**
+     * @method name:
+     * @des:  这样会报错
+     * @param :
+     * @return type:
+     * @date 创建时间:2021/1/11
+     * @version 1.0.0
+     * @author Chuck
+     **/
 
     @ApiOperation(value = "使用openFeign实现单文件上传", response = String.class, notes = "使用openFeign实现单文件上传,返回可访问的路径")
     @PostMapping("/feign/upload")
@@ -43,6 +49,16 @@ public class FileController {
         return feignControllerFile.uploadFileAction(request);
     }
 
+    /**
+     * @method name:
+     * @des:  这样会报错
+     * @param :
+     * @return type:
+     * @date 创建时间:2021/1/11
+     * @version 1.0.0
+     * @author Chuck
+     **/
+
     @ApiOperation(value = "使用openFeign实现多文件上传",  response = ArrayList.class, notes = "使用openFeign实现文件批量上传,返回list<String>")
     @PostMapping("/feign/multi_upload")
     //public ResponseEntity multiImportAction(HttpServletRequest request) {
@@ -50,15 +66,17 @@ public class FileController {
         return feignControllerFile.multiImportAction(request);
     }
 
-    @Headers({"Content-Type: multipart/form-data"})
-    @ApiOperation(value = "单文件上传2", response = String.class, notes = "单文件上传,返回可访问的路径")
+
+
+
+    @ApiOperation(value = "nacos+feign 单文件上传2", response = String.class, notes = "nacos+feign，单文件上传2")
     @PostMapping("/feign/upload2")
     public ResponseEntity uploadFileAction2(@RequestParam("file") MultipartFile file) {
         ResponseEntity responseEntity = feignControllerFile.uploadFileAction2(file);
         return responseEntity;
     }
 
-    @ApiOperation(value = "多文件上传2",  response = ArrayList.class, notes = "文件批量上传,返回list<String>")
+    @ApiOperation(value = "nacos+feign 多文件上传2",  response = ArrayList.class, notes = "nacos+feign 文件批量上传,返回list<String>")
     @PostMapping("/feign/multi_upload2")
     public ResponseEntity multiImportAction2(@RequestParam("file")  List<MultipartFile> files) {
         return feignControllerFile.multiImportAction2(files);

@@ -72,7 +72,6 @@ public class FileUploadController {
 
 
     @ApiOperation(value = "单文件上传2", response = String.class, notes = "单文件上传,返回可访问的路径")
-    //@PostMapping("/upload2")
     @RequestMapping(value = "/upload2",method = RequestMethod.POST , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadFileAction2(@RequestParam(value = "file")  MultipartFile file) {
         try {
@@ -86,7 +85,6 @@ public class FileUploadController {
     }
 
     @ApiOperation(value = "多文件上传2",  response = ArrayList.class, notes = "文件批量上传,返回list<String>")
-    //@PostMapping("/multi_upload2")
     @RequestMapping(value = "/multi_upload2",method = RequestMethod.POST , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity multiImportAction2(@RequestParam(value = "file")  List<MultipartFile> files) {
         try {

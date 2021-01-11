@@ -34,7 +34,7 @@ public class FeignInterceptor implements RequestInterceptor {
             //template.removeHeader("Content-Type");
 
             //将Content-Type信息放入header中
-            template.header(contentTypeKey,request.getHeader("multipart/form-data; boundary=--------------------------687878955487037618572546"));
+            //template.header(contentTypeKey,request.getHeader("multipart/form-data; boundary=--------------------------687878955487037618572546"));
         }
     }
 }

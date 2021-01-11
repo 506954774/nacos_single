@@ -25,6 +25,12 @@ import io.swagger.annotations.ApiParam;
 
 /**
  * TestController
+ *
+ *
+ 实际测试结果是，无法调起远程文件上传服务
+
+ *
+         *
  * 责任人:  Chuck
  * 修改人： Chuck
  * 创建/修改时间: 2020/12/31  17:31
@@ -45,7 +51,7 @@ public class RestTemplateController {
 
 
 
-    @ApiOperation(value = "使用RestTemplate实现RPC，普通get请求", notes = "使用RestTemplate实现RPC，普通get请求")
+    @ApiOperation(value = "测试使用RestTemplate实现RPC，普通get请求", notes = "使用RestTemplate实现RPC，普通get请求")
     @RequestMapping(value = "/resttemplate_rpc", method = RequestMethod.GET)
     public String echo(@ApiParam(name = "message", value = "客户端传来的数据", required = true)
                            @RequestParam(value = "message") String message) {
