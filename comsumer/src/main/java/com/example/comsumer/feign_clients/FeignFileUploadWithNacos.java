@@ -1,6 +1,7 @@
 package com.example.comsumer.feign_clients;
 
 import com.example.commons.vo.ResponseEntity;
+import com.example.comsumer.config.FeignSpringFormEncoder2;
 import com.example.comsumer.config.FeignSupportConfig;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,7 +24,8 @@ import javax.servlet.http.HttpServletRequest;
  * 创建/修改时间: 2020/12/30  19:50
  * Copyright : 2014-2018 深圳令令科技有限公司-版权所有
  **/
-@FeignClient(value = "file",configuration = FeignSupportConfig.class)
+@FeignClient(value = "file2",configuration = FeignSpringFormEncoder2.class)
+//@FeignClient(value = "file",configuration = FeignSupportConfig.class)
 //@FeignClient(value = "file" , configuration = OkFeignFileUpload.ClientConfiguration.class)
 public interface FeignFileUploadWithNacos
         //extends  UserProvider
@@ -55,9 +57,17 @@ public interface FeignFileUploadWithNacos
 
 
 
-    //@PostMapping("/multi_upload2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @RequestMapping(value = "/multi_upload2",method = RequestMethod.POST ,
+    /*@RequestMapping(value = "/multi_upload2",method = RequestMethod.POST ,
            // produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity multiImportAction2(@RequestParam(value = "file")  List<MultipartFile> files);
+    public ResponseEntity multiImportAction2(@RequestParam(value = "file")  MultipartFile[] files);
+
+   */
+
+
+    @PostMapping(value = "/multi_upload2",
+             produces ={MediaType.APPLICATION_JSON_UTF8_VALUE},
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+     ResponseEntity multiImportAction2(@RequestPart(value = "file")  MultipartFile[] files);
 }
+

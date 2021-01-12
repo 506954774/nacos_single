@@ -78,7 +78,7 @@ public class NacosFeignFileController {
 
     @ApiOperation(value = "nacos+feign 多文件上传2",  response = ArrayList.class, notes = "nacos+feign 文件批量上传,返回list<String>")
     @PostMapping("/feign/multi_upload2")
-    public ResponseEntity multiImportAction2(@RequestParam("file")  List<MultipartFile> files) {
+    public ResponseEntity multiImportAction2(@RequestParam("file")  MultipartFile[] files) {
         return feignControllerFile.multiImportAction2(files);
     }
 

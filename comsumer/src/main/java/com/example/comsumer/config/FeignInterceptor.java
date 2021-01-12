@@ -11,6 +11,7 @@ import feign.RequestTemplate;
 
 /**
  * FeignInterceptor
+ * 给调用加值减值
  * 责任人:  Chuck
  * 修改人： Chuck
  * 创建/修改时间: 2021/1/8  10:51

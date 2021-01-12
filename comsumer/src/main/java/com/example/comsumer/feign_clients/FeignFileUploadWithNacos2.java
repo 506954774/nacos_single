@@ -29,7 +29,7 @@ import feign.form.spring.SpringFormEncoder;
  * Copyright : 2014-2018 深圳令令科技有限公司-版权所有
  * https://blog.csdn.net/keypanj2ee/article/details/105426851
  **/
-@FeignClient(value="file2" , configuration = FeignFileUploadWithNacos2.ClientConfiguration.class)
+@FeignClient(value="file" , configuration = FeignFileUploadWithNacos2.ClientConfiguration.class)
 public interface FeignFileUploadWithNacos2 {
     /**
      * 文件上传
@@ -50,12 +50,12 @@ public interface FeignFileUploadWithNacos2 {
      * @throws Exception
      */
     @RequestMapping(value = "/multi_upload2",method = RequestMethod.POST ,
-            // produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+           // produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},//不加这个也可以
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity multiImportAction2(@RequestParam(value = "file") List<MultipartFile> files);
+     ResponseEntity multiImportAction2(@RequestPart(value = "file")MultipartFile[] files);//必须是@RequestPart注解，否则报错
 
 
-//文件配置转换  (内部类)
+    //文件配置转换  (内部类)
     class ClientConfiguration{
         @Autowired
         private ObjectFactory<HttpMessageConverters> messageConverters;

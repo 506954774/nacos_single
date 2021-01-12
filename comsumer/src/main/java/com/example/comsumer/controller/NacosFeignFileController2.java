@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +36,10 @@ public class NacosFeignFileController2 {
         ResponseEntity responseEntity = okFeignFileUpload.uploadFileAction2(file);
         return responseEntity;
     }
-
+    @ApiOperation(value = "nacos+feign 多文件上传2",  response = ArrayList.class, notes = "nacos+feign 文件批量上传,返回list<String>")
+    @PostMapping("/feign2/multi_upload2")
+    public ResponseEntity multiImportAction2(@RequestParam("file")  MultipartFile[] files) {
+        return okFeignFileUpload.multiImportAction2(files);
+    }
 
 }

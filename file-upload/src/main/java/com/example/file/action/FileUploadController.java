@@ -86,7 +86,7 @@ public class FileUploadController {
 
     @ApiOperation(value = "多文件上传2",  response = ArrayList.class, notes = "文件批量上传,返回list<String>")
     @RequestMapping(value = "/multi_upload2",method = RequestMethod.POST , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity multiImportAction2(@RequestParam(value = "file")  List<MultipartFile> files) {
+    public ResponseEntity multiImportAction2(@RequestParam(value = "file")  MultipartFile[] files) {
         try {
             List<String> result= multiImport(files);
             ResponseEntity<List<String>> responseEntity = new ResponseEntity<>(true);
@@ -155,6 +155,26 @@ public class FileUploadController {
 
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
         if(files==null||files.size()==0){
+            log.warn(LOGGER_PREFIX+"上传内容为空!", "");
+            throw new AdminException(AdminErrorCode.UPLOAD_CONTENT_EMPTY, "上传内容为空!");
+        }
+        else {
+            List<String> result = new ArrayList<>();
+            ResponseEntity<List<String>> responseEntity = new ResponseEntity<>(true);
+            for (MultipartFile singleFile:files) {
+                try {
+                    String url = uploadFile(singleFile);
+                    result.add(url);
+                } catch (AdminException e) {
+                    throw e;
+                }
+            }
+            return result;
+        }
+    }
+    public List<String> multiImport(MultipartFile[] files) throws AdminException {
+
+        if(files==null||files.length==0){
             log.warn(LOGGER_PREFIX+"上传内容为空!", "");
             throw new AdminException(AdminErrorCode.UPLOAD_CONTENT_EMPTY, "上传内容为空!");
         }
